@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize((process.env.DB_NAME || 'node_js'), (process.env.DB_USERNAME || 'root'), (process.env.DB_PASSWORD || 'secret'), {
     host: (process.env.DB_HOST || 'Homestead'),
