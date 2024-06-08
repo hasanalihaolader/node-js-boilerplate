@@ -22,7 +22,6 @@ const AuthController = {
             const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' })
             res.status(200).json(helper.formatApiResponse(200, 'Token generation successfully', { 'token': token }));
         } catch (error) {
-            console.log(error);
             return res.status(500).json(helper.formatApiResponse(500, 'Authentication failed'));
         }
     },
