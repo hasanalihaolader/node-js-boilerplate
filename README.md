@@ -1,4 +1,4 @@
-## 🚀 Node.js Boilerplate with Express
+## 🚀 Node.js Boilerplate with Express with auth, database config , logging, REST API template etc
 
 This boilerplate includes the setup for a Node.js application using Express, MySQL with Sequelize ORM, and Winston for logging.
 </br></br>
@@ -160,3 +160,9 @@ logger.warn('This is a warning message');
 logger.error('This is an error message');
 logger.debug('This is a debug message');
 ```
+
+</br></br>
+
+### Download API Collection
+https://www.postman.com/warped-space-453686/workspace/open-source/collection/12535469-0d506ab2-9014-49b0-b587-c40560bddf55?action=share&creator=12535469
+
