@@ -12,7 +12,10 @@ router.post('/refresh', authenticateToken, AuthController.refresh);
 const userRouter = express.Router();
 userRouter.use(authenticateToken)
 router.use('/user', userRouter);
+userRouter.get('', UserController.getUsers);
 userRouter.post('/create', UserController.create);
 userRouter.post('/update/:id', UserController.update);
+userRouter.post('/profile', UserController.userProfile);
+
 
 module.exports = router;
