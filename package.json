@@ -1,5 +1,5 @@
 {
-  "name": "sts-with-node",
+  "name": "node-js-boilerplate",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -22,7 +22,9 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "~1.9.1",
     "mysql2": "^3.0.0",
-    "sequelize": "^6.37.2"
+    "sequelize": "^6.37.2",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.7",
