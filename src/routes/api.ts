@@ -1,21 +1,23 @@
-var express = require('express');
-const UserController = require('../controller/userController');
-const authenticateToken = require('../middleware/authenticateToken');
-const AuthController = require('../controller/authController');
-var router = express.Router();
+import express, { Request, Response, NextFunction } from 'express';
+import UserController from '../controller/userController';
+import authenticateToken from '../middleware/authenticateToken';
+import AuthController from '../controller/authController';
 
-//Auth
+const router = express.Router();
+
+// Auth
 router.post('/login', AuthController.login);
 router.post('/refresh', authenticateToken, AuthController.refresh);
 
-//User
+// User
 const userRouter = express.Router();
-userRouter.use(authenticateToken)
+userRouter.use(authenticateToken);
+
 router.use('/user', userRouter);
+
 userRouter.get('', UserController.getUsers);
 userRouter.post('/create', UserController.create);
 userRouter.post('/update/:id', UserController.update);
 userRouter.post('/profile', UserController.userProfile);
 
-
-module.exports = router;
+export default router;
