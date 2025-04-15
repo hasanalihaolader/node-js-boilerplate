@@ -1,8 +1,4 @@
-interface ApiResponse {
-	code: number;
-	message: string;
-	data: Record<string, any>;
-}
+import { ApiResponse } from "@/interface/ApiResponse";
 
 const helper = {
 	formatApiResponse: (

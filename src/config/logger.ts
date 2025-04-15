@@ -1,14 +1,7 @@
+import { LoggerConfig } from "@/interface/LoggerConfig";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-interface LoggerConfig {
-	logLevel: string;
-	timeStampFormat: string;
-	fileNameFormat: string;
-	fileDateFormat: string;
-	logStoragePath: string;
-}
 
 const loggerConfig: LoggerConfig = {
 	logLevel: process.env.LOG_LEVEL || "info",

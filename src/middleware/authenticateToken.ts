@@ -27,7 +27,6 @@ const authenticateToken = (
 		}
 
 		req.user = decoded;
-
 		// Call next to continue processing the request
 		next();
 	});

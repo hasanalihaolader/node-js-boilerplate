@@ -1,22 +1,9 @@
+import { Config } from "@/interface/Config";
+import { DBConfig } from "@/interface/DbConfig";
 import dotenv from "dotenv";
 import type { Dialect } from "sequelize";
 
 dotenv.config();
-
-interface DBConfig {
-	username: string | undefined;
-	password: string | undefined;
-	database: string | undefined;
-	host: string | undefined;
-	port: number;
-	dialect: Dialect;
-}
-
-interface Config {
-	development: DBConfig;
-	test: DBConfig;
-	production: DBConfig;
-}
 
 const dbDialect = (process.env.DB_CONNECTION as Dialect) || "mysql";
 
