@@ -1,4 +1,4 @@
 {
-    "presets": ["@babel/preset-env"],
-    "parserOpts": { "allowReturnOutsideFunction": true }
+	"presets": ["@babel/preset-env"],
+	"parserOpts": { "allowReturnOutsideFunction": true }
 }

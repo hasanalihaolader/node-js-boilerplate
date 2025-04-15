@@ -1,51 +1,54 @@
-import { Sequelize, DataTypes, Model, Optional } from 'sequelize';
+import { Sequelize, DataTypes, Model, Optional } from "sequelize";
 
 interface UserAttributes {
-  id: number;
-  user_name: string;
-  password: string;
-  status: boolean;
+	id: number;
+	user_name: string;
+	password: string;
+	status: boolean;
 }
+type UserCreationAttributes = Optional<UserAttributes, "id">;
 
-// Optional fields when creating a user
-type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+export class User
+	extends Model<UserAttributes, UserCreationAttributes>
+	implements UserAttributes
+{
+	public id!: number;
+	public user_name!: string;
+	public password!: string;
+	public status!: boolean;
 
-export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
-  public id!: number;
-  public user_name!: string;
-  public password!: string;
-  public status!: boolean;
+	public readonly createdAt!: Date;
+	public readonly updatedAt!: Date;
 
-  // timestamps (optional: add createdAt/updatedAt if you use them)
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+	static initModel(sequelize: Sequelize): typeof User {
+		User.init(
+			{
+				id: {
+					type: DataTypes.INTEGER,
+					autoIncrement: true,
+					primaryKey: true,
+				},
+				user_name: {
+					type: DataTypes.STRING,
+					allowNull: false,
+					unique: true,
+				},
+				password: {
+					type: DataTypes.STRING,
+					allowNull: false,
+				},
+				status: {
+					type: DataTypes.BOOLEAN,
+					defaultValue: true,
+				},
+			},
+			{
+				sequelize,
+				tableName: "user",
+				modelName: "User",
+			}
+		);
+
+		return User;
+	}
 }
-
-export default (sequelize: Sequelize) => {
-  User.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      user_name: {
-        type: DataTypes.STRING,
-        unique: true,
-      },
-      password: {
-        type: DataTypes.STRING,
-      },
-      status: {
-        type: DataTypes.BOOLEAN,
-      },
-    },
-    {
-      sequelize,
-      tableName: 'user',
-      modelName: 'User',
-    }
-  );
-
-  return User;
-};

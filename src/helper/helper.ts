@@ -1,21 +1,21 @@
 interface ApiResponse {
-    code: number;
-    message: string;
-    data: Record<string, any>;
-  }
+	code: number;
+	message: string;
+	data: Record<string, any>;
+}
 
-  const helper = {
-    formatApiResponse: (
-      statusCode: number,
-      message: string,
-      context: Record<string, any> = {}
-    ): ApiResponse => {
-      return {
-        code: statusCode,
-        message: message,
-        data: context,
-      };
-    },
-  };
+const helper = {
+	formatApiResponse: (
+		statusCode: number,
+		message: string,
+		context: Record<string, any> = {},
+	): ApiResponse => {
+		return {
+			code: statusCode,
+			message: message,
+			data: context,
+		};
+	},
+};
 
-  export default helper;
+export default helper;

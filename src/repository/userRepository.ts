@@ -1,37 +1,45 @@
-import models from '../models';
-import { User } from '../models/user'; // Adjust this import based on your model export
-import { Optional } from 'sequelize';
+import models from "@/models";
+import type { User } from "@/models/userModel"; // Adjust this import based on your model export
+import type { Optional } from "sequelize";
 
 const userModel = models.user;
 
-interface UserPayload extends Optional<User, 'id'> {} // Assumes 'id' is auto-generated
+interface UserPayload extends Optional<User, "id"> {} // Assumes 'id' is auto-generated
 
-const userRepository = {
-  store: async (user: UserPayload): Promise<User> => {
-    return await userModel.create(user);
-  },
+class UserRepository {
+	// Method to store a new user
+	async store(user: UserPayload): Promise<User> {
+		return await userModel.create(user);
+	}
 
-  update: async (updateAblePayload: Partial<User>, id: number): Promise<User> => {
-    const user = await userModel.findByPk(id);
-    if (!user) {
-      throw new Error(`User with id ${id} not found`);
-    }
-    return await user.update(updateAblePayload);
-  },
+	// Method to update an existing user by ID
+	async update(updateAblePayload: Partial<User>, id: number): Promise<User> {
+		const user = await userModel.findByPk(id);
+		if (!user) {
+			throw new Error(`User with id ${id} not found`);
+		}
+		return await user.update(updateAblePayload);
+	}
 
-  findByUserName: async (userName: string): Promise<User | null> => {
-    return await userModel.findOne({ where: { user_name: userName, status: 1 } });
-  },
+	// Method to find a user by their username
+	async findByUserName(userName: string): Promise<User | null> {
+		return await userModel.findOne({
+			where: { user_name: userName, status: 1 },
+		});
+	}
 
-  findById: async (id: number): Promise<User | null> => {
-    return await userModel.findByPk(id);
-  },
+	// Method to find a user by their ID
+	async findById(id: number): Promise<User | null> {
+		return await userModel.findByPk(id);
+	}
 
-  findAll: async (): Promise<User[]> => {
-    return await userModel.findAll({
-      order: [['id', 'DESC']],
-    });
-  },
-};
+	// Method to find all users
+	async findAll(): Promise<User[]> {
+		return await userModel.findAll({
+			order: [["id", "DESC"]],
+		});
+	}
+}
 
-export default userRepository;
+// Export the repository class
+export default new UserRepository();

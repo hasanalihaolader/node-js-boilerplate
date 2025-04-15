@@ -1,62 +1,93 @@
-import LogService from '@/service/logService';
-import LogStatusEnum from '../enums/logStatus.enum';
-const logService = new LogService();
+import LogService from "@/service/logService";
+import LogStatusEnum from "@/enums/logStatus.enum";
 
-type ExtraData = Record<string, any>;
-type DataArray = any[];
+class Logger {
+	private logService: LogService;
 
-const logger = {
-  initializeLogServiceWithLevel: (
-    level: LogStatusEnum,
-    error_from: string = '',
-    error_code: number | string,
-    message: string = '',
-    data: DataArray = [],
-    extra?: ExtraData
-  ): void => {
-    logService.initialize(error_from, error_code, message, data, extra, level);
-    logService.log();
-  },
+	constructor() {
+		this.logService = new LogService();
+	}
 
-  info: (
-    error_from: string = '',
-    error_code: number | string,
-    message: string = '',
-    data: DataArray = [],
-    extra?: ExtraData
-  ): void => {
-    logger.initializeLogServiceWithLevel(LogStatusEnum.INFO, error_from, error_code, message, data, extra);
-  },
+	private initializeLogServiceWithLevel(
+		level: LogStatusEnum,
+		error_code: number | string,
+		extra?: Record<string, any>,
+		error_from = "",
+		message = "",
+		data: any[] = []
+	): void {
+		this.logService.initialize(error_code, error_from, message, data, extra, level);
+		this.logService.log();
+	}
 
-  warn: (
-    error_from: string = '',
-    error_code: number | string,
-    message: string = '',
-    data: DataArray = [],
-    extra?: ExtraData
-  ): void => {
-    logger.initializeLogServiceWithLevel(LogStatusEnum.WARN, error_from, error_code, message, data, extra);
-  },
+	public info(
+		error_code: number | string,
+		extra?: Record<string, any>,
+		error_from = "",
+		message = "",
+		data: any[] = []
+	): void {
+		this.initializeLogServiceWithLevel(
+			LogStatusEnum.INFO,
+			error_code,
+			extra,
+			error_from,
+			message,
+			data
+		);
+	}
 
-  error: (
-    error_from: string = '',
-    error_code: number | string,
-    message: string = '',
-    data: DataArray = [],
-    extra?: ExtraData
-  ): void => {
-    logger.initializeLogServiceWithLevel(LogStatusEnum.ERROR, error_from, error_code, message, data, extra);
-  },
+	public warn(
+		error_code: number | string,
+		extra?: Record<string, any>,
+		error_from = "",
+		message = "",
+		data: any[] = []
+	): void {
+		this.initializeLogServiceWithLevel(
+			LogStatusEnum.WARN,
+			error_code,
+			extra,
+			error_from,
+			message,
+			data
+		);
+	}
 
-  debug: (
-    error_from: string = '',
-    error_code: number | string,
-    message: string = '',
-    data: DataArray = [],
-    extra?: ExtraData
-  ): void => {
-    logger.initializeLogServiceWithLevel(LogStatusEnum.DEBUG, error_from, error_code, message, data, extra);
-  }
-};
+	public error(
+		error_code: number | string,
+		extra?: Record<string, any>,
+		error_from = "",
+		message = "",
+		data: any[] = []
+	): void {
+		this.initializeLogServiceWithLevel(
+			LogStatusEnum.ERROR,
+			error_code,
+			extra,
+			error_from,
+			message,
+			data
+		);
+	}
 
+	public debug(
+		error_code: number | string,
+		extra?: Record<string, any>,
+		error_from = "",
+		message = "",
+		data: any[] = []
+	): void {
+		this.initializeLogServiceWithLevel(
+			LogStatusEnum.DEBUG,
+			error_code,
+			extra,
+			error_from,
+			message,
+			data
+		);
+	}
+}
+
+const logger = new Logger();
 export default logger;
