@@ -3,9 +3,9 @@ import express, {
 	type Response,
 	type NextFunction,
 } from "express";
-import UserController from "@/controller/userController";
-import authenticateToken from "@/middleware/authenticateToken";
-import AuthController from "@/controller/authController";
+import UserController from "@/controller/UserController";
+import authenticateToken from "@/middleware/AuthenticateToken";
+import AuthController from "@/controller/AuthController";
 const router = express.Router();
 
 function asyncHandler(

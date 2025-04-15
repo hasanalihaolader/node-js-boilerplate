@@ -11,7 +11,7 @@ const basename = path.basename(__filename);
 const env =
 	(process.env.NODE_ENV as "development" | "test" | "production") ||
 	"development";
-const config = require("@/config/config").default[env];
+const config = (require("@/config/config")).default[env];
 
 const db: {
 	[key: string]: any;
@@ -33,30 +33,36 @@ if (config.use_env_variable) {
 	});
 }
 
-fs.readdirSync(__dirname)
-	.filter((file) => {
-		return (
-			file.indexOf(".") !== 0 &&
-			file !== basename &&
-			file.slice(-3) === ".ts" &&
-			file.indexOf(".test.ts") === -1
-		);
-	})
-	.forEach((file) => {
-		const model = require(path.join(__dirname, file)).default(
-			sequelize,
-			DataTypes,
-		);
-		db[model.name] = model;
-	});
+(async () => {
+	const files = fs
+		.readdirSync(__dirname)
+		.filter((file) => {
+			return (
+				file.indexOf('.') !== 0 &&
+				file !== basename &&
+				file.slice(-3) === '.ts' &&
+				file.indexOf('.test.ts') === -1
+			);
+		});
 
-for (const modelName of Object.keys(db)) {
-	if (db[modelName].associate) {
-		db[modelName].associate(db);
+	for (const file of files) {
+		const modelModule = await import(path.join(__dirname, file));
+		const modelClass = modelModule.default;
+
+		if (typeof modelClass?.initModel === 'function') {
+			const model = modelClass.initModel(sequelize);
+			db[model.name] = model;
+		}
 	}
-}
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+	for (const modelName of Object.keys(db)) {
+		if (db[modelName].associate) {
+			db[modelName].associate(db);
+		}
+	}
+
+	db.sequelize = sequelize;
+	db.Sequelize = Sequelize;
+})();
 
 export default db;

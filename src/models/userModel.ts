@@ -1,8 +1,8 @@
-import { UserAttributes } from "@/interface/model/UserAttributes";
-import { Sequelize, DataTypes, Model, Optional } from "sequelize";
+import type { UserAttributes } from "@/interface/model/UserAttributes";
+import { type Sequelize, DataTypes, Model, type Optional } from "sequelize";
 
 type UserCreationAttributes = Optional<UserAttributes, "id">;
-export class User
+export default class UserModel
 	extends Model<UserAttributes, UserCreationAttributes>
 	implements UserAttributes
 {
@@ -14,8 +14,8 @@ export class User
 	public readonly createdAt!: Date;
 	public readonly updatedAt!: Date;
 
-	static initModel(sequelize: Sequelize): typeof User {
-		User.init(
+	static initModel(sequelize: Sequelize): typeof UserModel {
+		UserModel.init(
 			{
 				id: {
 					type: DataTypes.INTEGER,
@@ -43,6 +43,6 @@ export class User
 			}
 		);
 
-		return User;
+		return UserModel;
 	}
 }

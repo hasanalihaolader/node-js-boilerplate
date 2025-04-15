@@ -1,4 +1,4 @@
-import { Config } from "@/interface/Config";
+import type { Config } from "@/interface/Config";
 import { DBConfig } from "@/interface/DbConfig";
 import dotenv from "dotenv";
 import type { Dialect } from "sequelize";

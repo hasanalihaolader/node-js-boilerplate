@@ -1,6 +1,6 @@
-import { ApiResponse } from "@/interface/ApiResponse";
+import type { ApiResponse } from "@/interface/ApiResponse";
 
-const helper = {
+const Helper = {
 	formatApiResponse: (
 		statusCode: number,
 		message: string,
@@ -14,4 +14,4 @@ const helper = {
 	},
 };
 
-export default helper;
+export default Helper;

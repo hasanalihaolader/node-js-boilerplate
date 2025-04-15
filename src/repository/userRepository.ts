@@ -1,5 +1,5 @@
 import models from "@/models";
-import type { User } from "@/models/userModel"; // Adjust this import based on your model export
+import type { User } from "@/models/UserModel"; // Adjust this import based on your model export
 import type { Optional } from "sequelize";
 
 const userModel = models.user;

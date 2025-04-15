@@ -1,4 +1,4 @@
-import UserController from "../controller/userController"
+import UserController from "../controller/UserController"
 import { describe, test, expect } from "@jest/globals"
 
 describe('Sum function', () =>{

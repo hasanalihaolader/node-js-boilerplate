@@ -4,9 +4,9 @@ dotenv.config();
 import type { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import helper from "@/helper/helper";
-import userRepository from "@/repository/userRepository";
-import logger from "@/utils/logger";
+import helper from "@/helper/Helper";
+import userRepository from "@/repository/UserRepository";
+import logger from "@/utils/Logger";
 
 interface JwtPayload {
 	userId: number;

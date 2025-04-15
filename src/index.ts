@@ -1,4 +1,4 @@
-import logger from "@/utils/logger";
+import logger from "@/utils/Logger";
 import app from "@/app";
 import dotenv from "dotenv";
 dotenv.config();

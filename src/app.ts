@@ -11,7 +11,7 @@ import bodyParser from "body-parser";
 
 import indexRouter from "./routes/index";
 import apiRouter from "./routes/api";
-import { sequelize, checkDatabaseConnection } from "@/config/database";
+import { sequelize, checkDatabaseConnection } from "@/config/Database";
 
 const app = express();
 

@@ -1,4 +1,4 @@
-import { DBConfig } from "./DbConfig";
+import type { DBConfig } from "./DbConfig";
 
 export interface Config {
     development: DBConfig;

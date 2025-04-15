@@ -1,5 +1,5 @@
-import LogService from "@/service/logService";
-import LogStatusEnum from "@/enums/logStatus.enum";
+import LogService from "@/service/LogService";
+import LogStatusEnum from "@/enums/LogStatus.enum";
 
 class Logger {
 	private logService: LogService;

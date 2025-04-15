@@ -1,4 +1,4 @@
-import { LoggerConfig } from "@/interface/LoggerConfig";
+import type { LoggerConfig } from "@/interface/LoggerConfig";
 import dotenv from "dotenv";
 
 dotenv.config();

@@ -1,7 +1,7 @@
 import winston, { type Logger } from "winston";
 import "winston-daily-rotate-file";
-import LogStatusEnum from "@/enums/logStatus.enum";
-import loggerConfig from "@/config/logger";
+import LogStatusEnum from "@/enums/LogStatus.enum";
+import loggerConfig from "@/config/Logger";
 
 type LogLevel = keyof typeof LogStatusEnum;
 

@@ -1,6 +1,6 @@
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
-import helper from "@/helper/helper";
+import helper from "@/helper/Helper";
 
 interface AuthenticatedRequest extends Request {
 	user?: string | JwtPayload;
