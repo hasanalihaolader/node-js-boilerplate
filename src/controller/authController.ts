@@ -12,20 +12,21 @@ interface CustomJwtPayload extends JwtPayload {
 }
 
 class AuthController {
-	async comparePassword(
+	comparePassword = async (
 		userInputPassword: string,
 		databaseHashedPassword: string
-	): Promise<boolean> {
+	): Promise<boolean> => {
 		return bcrypt.compare(userInputPassword, databaseHashedPassword);
 	}
 
-	async login(
+	login = async (
 		req: Request,
 		res: Response,
 		next: NextFunction
-	): Promise<Response> {
+	): Promise<Response> => {
 		try {
 			const user = await userRepository.findByUserName(req.body.username);
+
 			if (!user) {
 				return res
 					.status(401)
@@ -53,7 +54,7 @@ class AuthController {
 				.status(200)
 				.json(
 					helper.formatApiResponse(200, "Token generation successful", {
-						token,
+						token
 					})
 				);
 		} catch (error) {
@@ -63,11 +64,11 @@ class AuthController {
 		}
 	}
 
-	async refresh(
+	refresh = async (
 		req: Request,
 		res: Response,
 		next: NextFunction
-	): Promise<Response> {
+	): Promise<Response> => {
 		const token = req.header("Authorization");
 
 		if (!token) {

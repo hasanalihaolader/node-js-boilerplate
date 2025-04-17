@@ -6,13 +6,13 @@ export default class UserModel
 	extends Model<UserAttributes, UserCreationAttributes>
 	implements UserAttributes
 {
-	public id!: number;
-	public user_name!: string;
-	public password!: string;
-	public status!: boolean;
+	declare id: number;
+	declare user_name: string;
+	declare password: string;
+	declare status: boolean;
 
-	public readonly createdAt!: Date;
-	public readonly updatedAt!: Date;
+	declare readonly createdAt: Date;
+	declare readonly updatedAt: Date;
 
 	static initModel(sequelize: Sequelize): typeof UserModel {
 		UserModel.init(
@@ -38,7 +38,7 @@ export default class UserModel
 			},
 			{
 				sequelize,
-				tableName: "user",
+				tableName: "users",
 				modelName: "User",
 			}
 		);

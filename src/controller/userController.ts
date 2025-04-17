@@ -13,17 +13,15 @@ interface JwtPayload {
 }
 
 class UserController {
-	sum(a: number, b: number): number {
-		return a + b;
-	}
-
-	async getUsers(req: Request, res: Response, next: NextFunction) {
+	getUsers = async (req: Request, res: Response, next: NextFunction) => {
 		let statusCode = 200;
 		let message = "User data fetched successfully";
 		let context: object = {};
 
 		try {
 			const users = await userRepository.findAll();
+			console.log(users);
+
 			if (users.length > 0) {
 				context = users;
 			} else {
@@ -49,7 +47,7 @@ class UserController {
 			.json(helper.formatApiResponse(statusCode, message, context));
 	}
 
-	async userProfile(req: Request, res: Response, next: NextFunction) {
+	userProfile = async (req: Request, res: Response, next: NextFunction) => {
 		const token = req.header("Authorization");
 
 		if (!token) {
@@ -65,8 +63,8 @@ class UserController {
 				token,
 				process.env.SECRET_KEY as string,
 			) as JwtPayload;
-
 			const user = await userRepository.findById(decoded.userId);
+			console.log(user);
 
 			return res
 				.status(200)
@@ -76,13 +74,14 @@ class UserController {
 					}),
 				);
 		} catch (error) {
+			console.log(error);
 			return res
 				.status(400)
 				.json(helper.formatApiResponse(400, "User profile fetch failed."));
 		}
 	}
 
-	async create(req: Request, res: Response, next: NextFunction) {
+	create = async (req: Request, res: Response, next: NextFunction) => {
 		let statusCode = 500;
 		let message = "Failed to create user";
 		let context: any = {};
@@ -114,7 +113,7 @@ class UserController {
 			.json(helper.formatApiResponse(statusCode, message, context));
 	}
 
-	async update(req: Request, res: Response, next: NextFunction) {
+	update = async (req: Request, res: Response, next: NextFunction) => {
 		let statusCode = 500;
 		let message = "Failed to update user";
 		let context: any = {};
